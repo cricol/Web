@@ -1,7 +1,7 @@
 /* Styles des divisions principales de la page */
 body{
-
-    background-image: url(images/FONDGLOBAL.png);
+    background-color: white;
+    background-image:linear-gradient(white, rgb(155,220,255));
     background-repeat: repeat-x;
     margin:0% 0%;
     padding : 0.6em;
@@ -11,17 +11,16 @@ body{
 #page {
     background-color:white;
     width : 65%;
-    margin : auto ;
-    border : 0.2em solid black;
+    height: 100%;
+    margin : auto;
+    border : 0.1em solid black;
     padding : 0.1em;
+    border-radius:10px;
 }
 #entete{
-    background-color:rgb(72,198,236);
     color : #980101;
-    border: solid 0.1em #980101;
     height: 154px;
-    padding: 0em;
-    border-collapse: separate;
+    padding: 3em;
 }
 #pied{
     clear : both;
@@ -43,11 +42,11 @@ body{
 
 #contenu{
     border: none;
-    padding: 1.3em;
+    padding: 1em;
     background-color: white;
     border-left :  groove 0.8em #980101;
     margin-top : 1.2em;
-    margin-left: 18%;
+    margin-left: 25%;
     /* permet de fixer une hauteur mini sur les navigateurs modernes */
     min-height:27em;
     /* pour obtenir le m�me effet sur IE, sachant que si le contenu d�passe, il
