@@ -11,25 +11,17 @@ switch ($action) {
     case 'valideConnexion': {
             $login = $_REQUEST['login'];
             $mdp = $_REQUEST['mdp'];
-            $compte = $pdo->getInfosCompte($login, $mdp);
-            if (!is_array($compte) ) {
+            $visiteur = $pdo->getInfosVisiteur($login, $mdp);
+            if (!is_array($visiteur)) {
                 ajouterErreur("Login ou mot de passe incorrect");
                 include("vues/v_erreurs.php");
                 include("vues/v_connexion.php");
-            } elseif (is_array($compte) && $compte['fonction'] == 1) {
-                $id = $compte['id'];
-                $nom = $compte['nom'];
-                $prenom = $compte['prenom'];
-                $fonction = $compte['fonction'];
-                connecter($id, $nom, $prenom,$fonction);
-                include("vues/v_sommaire.php");
-            } elseif (is_array ($compte) && $compte['fonction'] == 2) {
-                $id = $compte['id'];
-                $nom = $compte['nom'];
-                $prenom = $compte['prenom'];
-                $fonction = $compte['comptable'];
+            } else {
+                $id = $visiteur['id'];
+                $nom = $visiteur['nom'];
+                $prenom = $visiteur['prenom'];
                 connecter($id, $nom, $prenom);
-                include("vues/v_sommaireComptable.php");
+                include("vues/v_sommaire.php");
             }
             break;
         }
