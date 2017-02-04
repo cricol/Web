@@ -50,6 +50,12 @@ class PdoGsb {
         }
         return PdoGsb::$monPdoGsb;
     }
+    
+    public function getVisiteur(){
+        $req = "select * from visiteur";
+        $rs = PdoGsb::$monPdo->query($req);
+        return $rs; 
+    }
 
     /**
      * Retourne les informations d'un visiteur
