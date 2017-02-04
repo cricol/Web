@@ -16,14 +16,14 @@ switch ($action) {
                 ajouterErreur("Login ou mot de passe incorrect");
                 include("vues/v_erreurs.php");
                 include("vues/v_connexion.php");
-            } elseif ($visiteur['fonction'] == 1) {
+            } elseif ($visiteur['fonction'] == 'visiteur') {
                 $id = $visiteur['id'];
                 $nom = $visiteur['nom'];
                 $prenom = $visiteur['prenom'];
                 connecter($id, $nom, $prenom);
                 include("vues/v_sommaire.php");
             }
-            elseif($visiteur['fonction'] == 2){
+            elseif($visiteur['fonction'] == 'comptable'){
                 $id = $visiteur['id'];
                 $nom = $visiteur['nom'];
                 $prenom = $visiteur['prenom'];

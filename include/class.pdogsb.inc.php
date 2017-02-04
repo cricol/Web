@@ -59,8 +59,9 @@ class PdoGsb {
      * @return l'id, le nom et le prénom sous la forme d'un tableau associatif 
      */
     public function getInfosVisiteur($login, $mdp) {
-        $req = "select visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom , visiteur.fonction as fonction from visiteur 
-		where visiteur.login='$login' and visiteur.mdp='$mdp'";
+        $req = "SELECT visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom , nomfonction.nom as fonction from visiteur 
+                INNER JOIN nomfonction on visiteur.fonction = nomfonction.id
+		WHERE visiteur.login='$login' and visiteur.mdp='$mdp' ";
         $rs = PdoGsb::$monPdo->query($req);
         $ligne = $rs->fetch();
         return $ligne;
