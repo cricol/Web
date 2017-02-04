@@ -1,13 +1,8 @@
 ﻿
-<table class="listeLegere">
-  	   <caption>Descriptif des éléments hors forfait
-       </caption>
-             <tr>
-                <th class="date">Date</th>
-				<th class="libelle">Libellé</th>  
-                <th class="montant">Montant</th>  
-                <th class="action">&nbsp;</th>              
-             </tr>
+<table class="contenu">
+  	   <h2>Descriptif des éléments hors forfait
+       </h2>
+             
           
     <?php    
 	    foreach( $lesFraisHorsForfait as $unFraisHorsForfait) 

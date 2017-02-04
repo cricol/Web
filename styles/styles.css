@@ -1,17 +1,17 @@
 /* Styles des divisions principales de la page */
 body{
     background-color: white;
-    background-image:linear-gradient(white, rgb(155,220,255));
-    background-repeat: repeat-x;
+    background-image:linear-gradient(white, rgb(240,240,240));
     margin:0% 0%;
     padding : 0.6em;
     font-family:"Trebuchet MS",Verdana,Geneva,Arial,Helvetica,sans-serif;
     font-size:0.8em;
+    height: 100%;
 }
 #page {
     background-color:white;
-    width : 65%;
-    height: 100%;
+    width : 75%;
+    height: auto;
     margin : auto;
     border : 0.1em solid black;
     padding : 0.1em;
@@ -19,7 +19,7 @@ body{
 }
 #entete{
     color : #980101;
-    height: 154px;
+    height: 150px;
     padding: 3em;
 }
 #pied{
@@ -37,16 +37,17 @@ body{
     background-color: white;
     color: rgb(0,85,227);
     float: left;
-    width: 14%;
+    width: 16%;
 }
 
 #contenu{
     border: none;
     padding: 1em;
     background-color: white;
-    border-left :  groove 0.8em #980101;
-    margin-top : 1.2em;
+    border-left :  groove 0.3em #ffffff;
+    margin-top : 0.5em;
     margin-left: 25%;
+    margin-right: 1%;
     /* permet de fixer une hauteur mini sur les navigateurs modernes */
     min-height:27em;
     /* pour obtenir le m�me effet sur IE, sachant que si le contenu d�passe, il
@@ -122,21 +123,13 @@ ul#menuList a:hover {
 
 /* Style des formulaires */
 .corpsForm {
-    border : solid 0.1em #000;
-    border-bottom-width:1px;
     margin-bottom : 0em;
     width : 95%;
 }
 .piedForm {
-    border-bottom-width : 0.1em;
-    border-left-width : 0.1em;
-    border-right-width : 0.1em;
-    border-top-width : 0em;
-    border-style : solid;
-    border-color : #000;
     text-align:right ;
     width : 95%;
-    margin-top:0em;
+    margin-top:0.1em;
 }
 form {
     margin-bottom:1em;  
@@ -249,7 +242,6 @@ table.listeLegere {
 
 /* Tableaux quadrill�s utilis�s pour l'affichage de listes avec contenu l�ger*/ 
 table.listeLegere th, table.listeLegere td {
-    border : dotted rgb(178,207,81) 0.1em;
     padding:0.5em;
     vertical-align : top;
     text-align : left;
@@ -281,11 +273,12 @@ table.listeLegere th.libelle{
     font-size: 14px;
     font-weight: bold;
     color: #1D2941;
+    padding: 0.5em;
     text-decoration: none;
     border : 1px solid #6988BE;
-    padding-left: 25px;
     background-color: #E9F1FE;
     height : 28px;
+    width: 95%;
 }
 
 #contenu img {
