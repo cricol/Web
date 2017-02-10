@@ -1,10 +1,10 @@
 <?php
 require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
-include("vues/v_entete.php") ;
 session_start();
-$pdo = PdoGsb::getPdoGsb();0
+$pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
+include("vues/v_entete.php") ;
 if(!isset($_REQUEST['uc']) || !$estConnecte){
      $_REQUEST['uc'] = 'connexion';
 }	 
