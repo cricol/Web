@@ -72,6 +72,27 @@ function getMois($date) {
     return $annee . $mois;
 }
 
+/**
+ * retourne le mois au format aaaamm selon le jour dans le mois
+  si debut du mois prend le mois precedent sinon prend le mois
+ * courrant
+ * @param $date au format  jj/mm/aaaa
+ * @return le mois au format aaaamm
+ */
+function getMoisComptable($date) {
+    if (estDateValide($date)) {
+        @list($jour, $mois, $annee) = explode('/', $date);
+        if (strlen($mois) == 1) {
+            $mois = "0" . $mois;
+        } 
+        if ($mois == '01') {
+            $mois = 12;
+            $annee = $annee - 1;
+        }
+    }
+    return $mois . $annee;
+}
+
 /* gestion des erreurs */
 
 /**
@@ -204,4 +225,5 @@ function nbErreurs() {
         return count($_REQUEST['erreurs']);
     }
 }
+
 ?>
