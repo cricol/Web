@@ -16,30 +16,29 @@
                 <label for="choiMois" accesskey="n">Mois : </label>
                 <select id="choiMois" name="choiMois">
                     <?php
-                    if($valider != 'ok'){
+                    if ($valider != 'ok') {
                         ?>
-                     <option selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>;
-                     <?php
-                }
-                else{
-                    foreach ($lesMois as $unMois) {
-                        $mois = $unMois['mois'];
-                        $numAnnee = $unMois['numAnnee'];
-                        $numMois = $unMois['numMois'];
-                        if ($mois == $moisASelectionner) {
-                            ?>
-                            <option selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>
-                            <?php
-                        } else {
-                            ?>
-                            <option value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>
-                            <?php
+                        <option selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>;
+                        <?php
+                    } else {
+                        foreach ($lesMois as $unMois) {
+                            $mois = $unMois['mois'];
+                            $numAnnee = $unMois['numAnnee'];
+                            $numMois = $unMois['numMois'];
+                            if ($mois == $moisASelectionner) {
+                                ?>
+                                <option selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>
+                                <?php
+                            } else {
+                                ?>
+                                <option value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>
+                                <?php
+                            }
                         }
-                    }
                     }
                     ?>    
 
-                    
+
                 </select>
             </p>
             </p>

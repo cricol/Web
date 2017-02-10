@@ -80,16 +80,15 @@ function getMois($date) {
  * @return le mois au format aaaamm
  */
 function getMoisComptable($date) {
-    if (estDateValide($date)) {
-        @list($jour, $mois, $annee) = explode('/', $date);
-        if (strlen($mois) == 1) {
-            $mois = "0" . $mois;
-        } 
-        if ($mois == '01') {
-            $mois = 12;
-            $annee = $annee - 1;
-        }
+    @list($jour, $mois, $annee) = explode('/', $date);
+    if (strlen($mois) == 1) {
+        $mois = "0" . $mois;
     }
+    if ($mois == '01') {
+        $mois = 12;
+        $annee = $annee - 1;
+    }
+
     return $mois . $annee;
 }
 
@@ -225,5 +224,4 @@ function nbErreurs() {
         return count($_REQUEST['erreurs']);
     }
 }
-
 ?>
