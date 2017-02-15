@@ -3,12 +3,21 @@
     <form action="index.php?uc=validerfrais&action=validerSelectionVisiteur" method="POST">
         <div class="corpsForm">
             <p> <!-- choix du visiteur avec une liste déroulante nom et prénom -->
-                <label for="choixVisiteur">Choisir Visiteur : </label>
-                <select id="choixVisiteur" name="choixVisiteur">
+                <label for="choiVisiteur">Choisir Visiteur : </label>
+                <select id="choiVisiteur" name="choiVisiteur">
                     <?php
-                    while ($result = $lesVisiteurs->fetch()) {
-
-                        echo "<option value='" . $result['id'] . "'>" . $result['nom'] . " " . $result['prenom'] . "</option>";
+                    foreach ($lesVisiteurs as $visiteur) {
+                        if ($visiteur['fonction'] == 1) {
+                            if ($visiteur['id'] == str_replace(' ', '', $idVisiteur) ) {
+                                ?>
+                                <option value="<?php echo $visiteur['id'] ?>" selected " ><?php echo $visiteur['nom'] . " " . $visiteur['prenom'] ?></option> 
+                                <?php
+                            } else {
+                                ?>
+                                <option value="<?php echo $visiteur['id']?>" ><?php echo $visiteur['nom'] . " " . $visiteur['prenom'] ?></option>
+                                <?php
+                            }
+                        }
                     }
                     ?> 
                 </select>
@@ -16,9 +25,9 @@
                 <label for="choiMois" accesskey="n">Mois : </label>
                 <select id="choiMois" name="choiMois">
                     <?php
-                    if ($valider != 'ok') {
+                    if ($moisASelectionner == NULL) {
                         ?>
-                        <option selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>;
+                        <option selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>
                         <?php
                     } else {
                         foreach ($lesMois as $unMois) {

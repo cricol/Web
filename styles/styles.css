@@ -1,12 +1,12 @@
 /* Styles des divisions principales de la page */
 body{
-    background-color: white;
     background-image:linear-gradient(white, rgb(240,240,240));
     margin:0% 0%;
     padding : 0.6em;
     font-family:"Trebuchet MS",Verdana,Geneva,Arial,Helvetica,sans-serif;
     font-size:0.8em;
-    height: 120%;
+    height : auto;
+    min-height: 1000px;
 }
 #page {
     background-color:white;

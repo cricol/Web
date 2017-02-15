@@ -23,7 +23,6 @@ class PdoGsb {
     private static $mdp = '';
     private static $monPdo;
     private static $monPdoGsb = null;
-    
 
     /**
      * Constructeur privé, crée l'instance de PDO qui sera sollicitée
@@ -51,22 +50,23 @@ class PdoGsb {
         }
         return PdoGsb::$monPdoGsb;
     }
-    
-    public function getVisiteur(){
-        $req = "select * from visiteur";
+
+    public function getVisiteur() {
+        $req = "SELECT * 
+                FROM visiteur";
         $rs = PdoGsb::$monPdo->query($req);
-        return $rs; 
+        return $rs;
     }
 
     /**
-     * Retourne les informations d'un visiteur
+     * Retourne les informations d'un visiteur ou un comptable
 
      * @param $login 
      * @param $mdp
-     * @return l'id, le nom et le prénom sous la forme d'un tableau associatif 
+     * @return l'id, le nom, le prénom et la fonction sous la forme d'un tableau associatif 
      */
     public function getInfosVisiteur($login, $mdp) {
-        $req = "SELECT visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom , nomfonction.nom as fonction from visiteur 
+        $req = "SELECT visiteur.id as id, visiteur.nom as nom, visiteur.prenom as prenom , nomfonction.nom as fonction from visiteur
                 INNER JOIN nomfonction on visiteur.fonction = nomfonction.id
 		WHERE visiteur.login='$login' and visiteur.mdp='$mdp' ";
         $rs = PdoGsb::$monPdo->query($req);
@@ -122,10 +122,10 @@ class PdoGsb {
      */
     public function getLesFraisForfait($idVisiteur, $mois) {
         $req = "select fraisforfait.id as idfrais, fraisforfait.libelle as libelle, 
-		lignefraisforfait.quantite as quantite from lignefraisforfait inner join fraisforfait 
-		on fraisforfait.id = lignefraisforfait.idfraisforfait
-		where lignefraisforfait.idvisiteur ='$idVisiteur' and lignefraisforfait.mois='$mois' 
-		order by lignefraisforfait.idfraisforfait";
+		lignefraisforfait.quantite as quantite from lignefraisforfait 
+                inner join fraisforfait on fraisforfait.id = lignefraisforfait.idFraisForfait
+		where lignefraisforfait.idVisiteur ='$idVisiteur' and lignefraisforfait.mois='$mois' 
+		order by lignefraisforfait.idFraisForfait";
         $res = PdoGsb::$monPdo->query($req);
         $lesLignes = $res->fetchAll();
         return $lesLignes;

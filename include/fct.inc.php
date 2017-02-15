@@ -75,21 +75,23 @@ function getMois($date) {
 /**
  * retourne le mois au format aaaamm selon le jour dans le mois
   si debut du mois prend le mois precedent sinon prend le mois
- * courrant
+  courrant
  * @param $date au format  jj/mm/aaaa
  * @return le mois au format aaaamm
  */
 function getMoisComptable($date) {
     @list($jour, $mois, $annee) = explode('/', $date);
+
+    if ($jour < "10") {
+        $date = date("d/m/Y", strtotime("-1 month"));
+        @list($jour, $mois, $annee) = explode('/', $date);
+    }
+
     if (strlen($mois) == 1) {
         $mois = "0" . $mois;
     }
-    if ($mois == '01') {
-        $mois = 12;
-        $annee = $annee - 1;
-    }
 
-    return $mois . $annee;
+    return  $annee . $mois ;
 }
 
 /* gestion des erreurs */

@@ -1,21 +1,21 @@
 <?php
 
 include("vues/comptable/v_sommaireComptable.php");
+
 $lesVisiteurs = $pdo->getVisiteur();
 $mois = getMoisComptable(date("d/m/Y"));
 $lesMois = getMois(date("d/m/Y"));
-$numAnnee = substr($mois, 2, 4);
-$numMois = substr($mois, 0, 2);
-$valider = 'off';
+$numAnnee = substr($mois, 0, 4);
+$numMois = substr($mois, 4, 2);
 $action = $_REQUEST['action'];
+
 switch ($action) {
     case 'vuevaliderfrais': {
             include("vues/comptable/v_validerfrais.php");
             break;
         }
     case 'validerSelectionVisiteur': {
-            $valider = 'ok';
-            $idVisiteur = $_POST['choixVisiteur'];
+            $idVisiteur = $_POST['choiVisiteur'];
             $leMois = $_REQUEST['choiMois'];
             $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
             $moisASelectionner = $leMois;
@@ -33,6 +33,8 @@ switch ($action) {
             include("vues/comptable/v_etatFraisComptable.php");
             break;
         }
+    case 'envoiModifFicheFrais':{
+    }
 }
 ?>
 
