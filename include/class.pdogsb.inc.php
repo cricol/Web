@@ -318,6 +318,19 @@ class PdoGsb {
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
         PdoGsb::$monPdo->exec($req);
     }
+    
+    /**
+     * Recupere les infos de la table etat
+
+     * @return un tableau avec les infos de la table etat
+     */
+    public function getTableEtat() {
+        $req = "SELECT *
+                FROM etat";
+        $res = PdoGsb::$monPdo->query($req);
+        $laLigne = $res->fetchAll();
+        return $laLigne;
+    }
 
 }
 ?>

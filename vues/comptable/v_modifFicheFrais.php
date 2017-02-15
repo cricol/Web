@@ -6,14 +6,26 @@
     <h3> Situation de la Fiche de Frais : <?php echo $libEtat ?></h3>
 
     <table class="listeLegere">
-        <!--<td>
+        <td>
+            <label for="choixSituation" >Saisi de la Situation :</label>
             <select name="SituationFraisForfait" size="3">
-                <option>Enregistré</option>
-                <option>Validé</option>
-                <option>Remboursé</option>
+                <?php
+                foreach ($lesEtats as $unEtat) {
+                    if($unEtat['libelle'] == $libEtat){
+                        ?>                    }
+                        <option value="<?php echo $unEtat['id'] ?>" selected " ><?php echo $unEtat['libelle'] ?></option> 
+                        <?php
+                    }
+                    else{
+                        ?>
+                        <option value="<?php echo $unEtat['id'] ?>"  ><?php echo $unEtat['libelle'] ?></option> 
+                    <?php
+                        }
+                }
+                ?>
             </select>
         </td>
-        <td> -->
+        <td> 
 
         </td>
     </table>
@@ -42,7 +54,7 @@
                 foreach ($lesFraisForfait as $unFraisForfait) {
                     $quantite = $unFraisForfait['quantite'];
                     ?>
-                <td class="qteForfait"><TEXTAREA name="nom" rows=1 cols=1><?php echo $quantite ?></textarea> </td>
+                <td class="qteForfait"><TEXTAREA name="quantite" rows=1 cols=2><?php echo $quantite ?></textarea> </td>
                     <?php
                 }
                 ?>
@@ -66,9 +78,9 @@
                 $montant = $unFraisHorsForfait['montant'];
                 ?>
                 <tr>
-                    <td><TEXTAREA name="nom" rows=1 cols=10><?php echo $date ?></textarea></td>
-                    <td><TEXTAREA name="nom" rows=2 cols=20><?php echo $libelle ?></textarea></td>
-                    <td><TEXTAREA name="nom" rows=1 cols=10><?php echo $montant ?></textarea></td>                    
+                    <td><TEXTAREA type="date" name="date" rows=1 cols=10><?php echo $date ?></textarea></td>
+                    <td><TEXTAREA name="libelle" rows=2 cols=20><?php echo $libelle ?></textarea></td>
+                    <td><TEXTAREA name="montant" rows=1 cols=10><?php echo $montant ?></textarea></td>                    
                 </tr>
 
                 <?php

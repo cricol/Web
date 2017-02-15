@@ -48,6 +48,7 @@ switch ($action) {
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
             $dateModif = $lesInfosFicheFrais['dateModif'];
             $dateModif = dateAnglaisVersFrancais($dateModif);
+            $lesEtats = $pdo->getTableEtat();
             include("vues/comptable/v_modifFicheFrais.php");
             break;
         }
@@ -67,6 +68,7 @@ switch ($action) {
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
             $dateModif = $lesInfosFicheFrais['dateModif'];
             $dateModif = dateAnglaisVersFrancais($dateModif);
+
             include("vues/comptable/v_modifFicheFrais.php");
             break;
         }
