@@ -1,24 +1,13 @@
 
 <h3>Fiche de frais du mois <?php echo $numMois . "-" . $numAnnee ?> : 
 </h3>
-<form action="index.php?uc=validerfrais&action=envoiModifFicheFrais" method="POST">
-    <div class="encadre">
-        <table class="listeLegere">
-            <th> Situation de la Fiche de Frais</th>
-        </table>
-        <table class="listeLegere">
-            <td>
-                <select name="SituationFraisForfait" size="3">
-                    <option>Enregistré</option>
-                    <option>Validé</option>
-                    <option>Remboursé</option>
-                </select>
-            </td>
-            <td>
-                               
-                <input id="ok" type="submit" value="Modifier La Fiche de Frais" size="20" />               
-            </td>
-        </table>
+
+<div class="encadre">
+    <form  action="index.php?uc=validerfrais&action=ModifFichierFrais" method="POST"> 
+        <input type="hidden" name="visiteur" value="<?php echo $idVisiteur ?>" />
+        <input type="hidden" name="mois" value="<?php echo $leMois ?>" />
+        <h3> Situation de la Fiche de Frais : <?php echo $libEtat ?></h3>
+<input id="ok" type="submit" value="Modifier La Fiche de Frais" size="20" />  
         <table class="listeLegere">
             <?php
             //Si il n'y a pas de fiche de frais affiche "Pas de fiche " sinon affiche les frais
@@ -50,10 +39,7 @@
                     ?>
 
                 </tr>
-            </table>
 
-
-            <table class="listeLegere">
                 <caption><h3>Descriptif des éléments hors forfait -<?php echo $nbJustificatifs ?> justificatifs reçus -</h3>
                 </caption>
                 <tr>
@@ -79,8 +65,10 @@
 
             </table>
         <?php } ?>
-    </div>
-</form>
+        
+    </form>
+</div>
+
 </div>
 
 
