@@ -14,14 +14,14 @@ switch ($action) {
             break;
         }
     case 'validerSelectionVisiteur': {
-            $idVisiteur = $_POST['choiVisiteur'];
+            $VisiteurSelectionner = $_POST['choiVisiteur'];
             $leMois = $_POST['choiMois'];
-            $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+            $lesMois = $pdo->getLesMoisDisponibles($VisiteurSelectionner);
             $moisASelectionner = $leMois;
             include("vues/comptable/v_validerVisiteur.php");
-            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
-            $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
-            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($VisiteurSelectionner, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($VisiteurSelectionner, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($VisiteurSelectionner, $leMois);
             $numAnnee = substr($leMois, 0, 4);
             $numMois = substr($leMois, 4, 2);
             $libEtat = $lesInfosFicheFrais['libEtat'];
@@ -33,14 +33,14 @@ switch ($action) {
             break;
         }
     case 'ModifFichierFrais': {
-            $idVisiteur = $_POST['visiteur'];
+            $VisiteurSelectionner = $_POST['visiteur'];
             $leMois = $_POST['mois'];
-            $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+            $lesMois = $pdo->getLesMoisDisponibles($VisiteurSelectionner);
             $moisASelectionner = $leMois;
             include("vues/comptable/v_validerVisiteur.php");
-            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
-            $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
-            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($VisiteurSelectionner, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($VisiteurSelectionner, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($VisiteurSelectionner, $leMois);
             $numAnnee = substr($leMois, 0, 4);
             $numMois = substr($leMois, 4, 2);
             $libEtat = $lesInfosFicheFrais['libEtat'];
@@ -54,14 +54,14 @@ switch ($action) {
         }
     case 'supprimerFraisHorsForfais': {
             $pdo->majSuppressionLigneFraisForfaitHorsForfait($_POST['id'], $_POST['libellefraishorsforfait']);
-            $idVisiteur = $_POST['visiteur'];
+            $VisiteurSelectionner = $_POST['visiteur'];
             $leMois = $_POST['mois'];
-            $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+            $lesMois = $pdo->getLesMoisDisponibles($VisiteurSelectionner);
             $moisASelectionner = $leMois;
             include("vues/comptable/v_validerVisiteur.php");
-            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
-            $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
-            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($VisiteurSelectionner, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($VisiteurSelectionner, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($VisiteurSelectionner, $leMois);
             $numAnnee = substr($leMois, 0, 4);
             $numMois = substr($leMois, 4, 2);
             $libEtat = $lesInfosFicheFrais['libEtat'];
@@ -74,25 +74,75 @@ switch ($action) {
             break;
         }
     case 'reporterunFrais': {
-            $idVisiteur = $_POST['visiteur'];
-              $leMois = $_POST['mois'];
-              $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
-              $moisASelectionner = $leMois;
-              include("vues/comptable/v_validerVisiteur.php");
-              $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
-              $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
-              $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
-              $numAnnee = substr($leMois, 0, 4);
-              $numMois = substr($leMois, 4, 2);
-              $libEtat = $lesInfosFicheFrais['libEtat'];
-              $montantValide = $lesInfosFicheFrais['montantValide'];
-              $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
-              $dateModif = $lesInfosFicheFrais['dateModif'];
-              $dateModif = dateAnglaisVersFrancais($dateModif);
+            $VisiteurSelectionner = $_POST['visiteur'];
+            $leMois = $_POST['mois'];
+            $lesMois = $pdo->getLesMoisDisponibles($VisiteurSelectionner);
+            $moisASelectionner = $leMois;
+            include("vues/comptable/v_validerVisiteur.php");
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($VisiteurSelectionner, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($VisiteurSelectionner, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($VisiteurSelectionner, $leMois);
+            $numAnnee = substr($leMois, 0, 4);
+            $numMois = substr($leMois, 4, 2);
+            $libEtat = $lesInfosFicheFrais['libEtat'];
+            $montantValide = $lesInfosFicheFrais['montantValide'];
+            $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
+            $dateModif = $lesInfosFicheFrais['dateModif'];
+            $dateModif = dateAnglaisVersFrancais($dateModif);
 
-              include("vues/comptable/v_modifFicheFrais.php"); 
+            include("vues/comptable/v_modifFicheFrais.php");
             break;
         }
+    case 'suivrePaiement': {
+            $lesVisiteurs = $pdo->getVisiteur();
+            $lesFichesFrais = $pdo->getToutesLesFichesFrais();
+            include("vues/comptable/v_validerMoispourSuivie.php");
+            break;
+        }
+    case 'afficheFraisaValider': {            
+            $lesVisiteurs = $pdo->getVisiteur();
+            $lesFichesFrais = $pdo->getToutesLesFichesFrais();
+            $VisiteurSelectionner = $_POST['choiVisiteur'];
+            $leMois = $_POST['choiMois'];
+            $moisSelectionner = $leMois;
+            include("vues/comptable/v_validerMoispourSuivie.php");
+            
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($VisiteurSelectionner, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($VisiteurSelectionner, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($VisiteurSelectionner, $leMois);
+            $numAnnee = substr($leMois, 0, 4);
+            $numMois = substr($leMois, 4, 2);
+            $libEtat = $lesInfosFicheFrais['libEtat'];
+            $montantValide = $lesInfosFicheFrais['montantValide'];
+            $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
+            $dateModif = $lesInfosFicheFrais['dateModif'];
+            $dateModif = dateAnglaisVersFrancais($dateModif);
+            include("vues/comptable/v_miseEnPaiement.php");
+            break;
+        }
+        case 'miseEnPaiement': {            
+            $lesVisiteurs = $pdo->getVisiteur();
+            $lesFichesFrais = $pdo->getToutesLesFichesFrais();
+            $VisiteurSelectionner = $_POST['visiteur'];
+            $leMois = $_POST['mois'];
+            $moisSelectionner = $leMois;
+            include("vues/comptable/v_validerMoispourSuivie.php");
+            $nouvelleEtat = "RB";
+            $pdo->majEtatFicheFrais($VisiteurSelectionner, $moisSelectionner, $nouvelleEtat);
+            $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($VisiteurSelectionner, $leMois);
+            $lesFraisForfait = $pdo->getLesFraisForfait($VisiteurSelectionner, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($VisiteurSelectionner, $leMois);
+            $numAnnee = substr($leMois, 0, 4);
+            $numMois = substr($leMois, 4, 2);
+            $libEtat = $lesInfosFicheFrais['libEtat'];
+            $montantValide = $lesInfosFicheFrais['montantValide'];
+            $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
+            $dateModif = $lesInfosFicheFrais['dateModif'];
+            $dateModif = dateAnglaisVersFrancais($dateModif);
+            include("vues/comptable/v_miseEnPaiement.php");
+            break;
+        }
+        
 }
 ?>
 

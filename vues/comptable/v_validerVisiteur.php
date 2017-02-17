@@ -8,7 +8,7 @@
                     <?php
                     foreach ($lesVisiteurs as $visiteur) {
                         if ($visiteur['fonction'] == 1) {
-                            if ($visiteur['id'] == str_replace(' ', '', $idVisiteur) ) {
+                            if ($visiteur['id'] == str_replace(' ', '', $VisiteurSelectionner) ) {
                                 ?>
                                 <option value="<?php echo $visiteur['id'] ?>" selected  ><?php echo $visiteur['nom'] . " " . $visiteur['prenom'] ?></option> 
                                 <?php

@@ -3,20 +3,23 @@
 </h3>
 
 <div class="encadre">
-    <form  action="index.php?uc=validerfrais&action=ModifFichierFrais" method="POST"> 
-        <input type="hidden" name="visiteur" value="<?php echo $VisiteurSelectionner ?>" />
+    <form  action="index.php?uc=validerfrais&action=miseEnPaiement" method="POST"> 
+
+        <?php
+        //Si il n'y a pas de fiche de frais affiche "Pas de fiche " sinon affiche les frais
+        if (!$lesFraisForfait || $libEtat != 'Validée et mise en paiement') {
+            ?>
+            <h1>Pas de fiche de frais pour ce visiteur ce mois</h1>
+        <?php } 
+        
+        else {
+            ?>
+            <h3> Situation de la Fiche de Frais : <?php echo $libEtat ?></h3>
+            <input type="hidden" name="visiteur" value="<?php echo $VisiteurSelectionner ?>" />
         <input type="hidden" name="mois" value="<?php echo $leMois ?>" />
-        <h3> Situation de la Fiche de Frais : <?php echo $libEtat ?></h3>
-        <input id="ok" type="submit" value="Modifier La Fiche de Frais" size="20" />  
-        <table class="listeLegere">
-            <?php
-            //Si il n'y a pas de fiche de frais affiche "Pas de fiche " sinon affiche les frais
-            if (!$lesFraisForfait) {
-                ?>
-                <h1>Pas de fiche de frais pour ce visiteur ce mois</h1>
-            <?php } else {
-                ?>
-                <caption><h3>Eléments forfaitisés</h3></caption>
+            <input id="ok" type="submit" value="Mise en Paiment de la Fiche de Frais" size="20" />  
+            <caption><h3>Eléments forfaitisés</h3></caption>
+            <table class="listeLegere">
                 <tr>
                     <?php
                     foreach ($lesFraisForfait as $unFraisForfait) {
@@ -40,9 +43,9 @@
 
                 </tr>
             </table>
+            <caption><h3>Descriptif des éléments hors forfait -<?php echo $nbJustificatifs ?> justificatifs reçus -</h3>
+            </caption>
             <table class="listeLegere">
-                <caption><h3>Descriptif des éléments hors forfait -<?php echo $nbJustificatifs ?> justificatifs reçus -</h3>
-                </caption>
                 <tr>
                     <th class="date">Date</th>
                     <th class="libelle">Libellé</th>
@@ -65,7 +68,9 @@
                 ?>
 
             </table>
-        <?php } ?>
+            <?php
+        }
+        ?>
 
     </form>
 </div>

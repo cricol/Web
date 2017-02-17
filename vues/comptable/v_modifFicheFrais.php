@@ -64,15 +64,11 @@
                         <form action="index.php?uc=validerfrais&action=supprimerFraisHorsForfais" method="post">
                         <input type="hidden" name="id" value="<?php echo $idFraisHorsForfait ?>"/>
                         <input type="hidden" name="libellefraishorsforfait" value="<?php echo $libelle ?>"/>
-                        <input type="hidden" name="visiteur" value="<?php echo $idVisiteur ?>" />
+                        <input type="hidden" name="visiteur" value="<?php echo $VisiteurSelectionner ?>" />
                         <input type="hidden" name="mois" value="<?php echo $leMois ?>" />
                         <input type="submit" name="supprimer" value="Supprimer"> 
                 </form> 
-                </td>
                 
-                
-                
-                <td>
                     <input type="submit" name="<?php $unFraisHorsForfait['id'] ?>" value="Reporter Le Frais"> </td>
 
                 </tr>

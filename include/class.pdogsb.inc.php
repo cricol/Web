@@ -327,6 +327,18 @@ class PdoGsb {
         $laLigne = $res->fetch();
         return $laLigne;
     }
+    /**
+     * Retourne les informations d'une fiche de frais
+
+     * @return un tableau avec des champs de jointure entre une fiche de frais et la ligne d'état 
+     */
+    public function getToutesLesFichesFrais() {
+        $req = "select * from  fichefrais inner join etat on fichefrais.idEtat = etat.id 
+                order by idEtat DESC";
+        $res = PdoGsb::$monPdo->query($req);
+        $laLigne = $res->fetchAll();
+        return $laLigne;
+    }
 
     /**
      * Modifie l'état et la date de modification d'une fiche de frais
@@ -336,7 +348,7 @@ class PdoGsb {
      * @param $mois sous la forme aaaamm
      */
     public function majEtatFicheFrais($idVisiteur, $mois, $etat) {
-        $req = "update ficheFrais set idEtat = '$etat', dateModif = now() 
+        $req = "update fichefrais set idEtat = '$etat', dateModif = now() 
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
         PdoGsb::$monPdo->exec($req);
     }
