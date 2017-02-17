@@ -6,30 +6,6 @@
     <h3> Situation de la Fiche de Frais : <?php echo $libEtat ?></h3>
 
     <table class="listeLegere">
-        <td>
-            <label for="choixSituation" >Saisi de la Situation :</label>
-            <select name="SituationFraisForfait" size="3">
-                <?php
-                foreach ($lesEtats as $unEtat) {
-                    if($unEtat['libelle'] == $libEtat){
-                        ?>                    }
-                        <option value="<?php echo $unEtat['id'] ?>" selected " ><?php echo $unEtat['libelle'] ?></option> 
-                        <?php
-                    }
-                    else{
-                        ?>
-                        <option value="<?php echo $unEtat['id'] ?>"  ><?php echo $unEtat['libelle'] ?></option> 
-                    <?php
-                        }
-                }
-                ?>
-            </select>
-        </td>
-        <td> 
-
-        </td>
-    </table>
-    <table class="listeLegere">
         <?php
         //Si il n'y a pas de fiche de frais affiche "Pas de fiche " sinon affiche les frais
         if (!$lesFraisForfait) {
@@ -54,7 +30,7 @@
                 foreach ($lesFraisForfait as $unFraisForfait) {
                     $quantite = $unFraisForfait['quantite'];
                     ?>
-                <td class="qteForfait"><TEXTAREA name="quantite" rows=1 cols=2><?php echo $quantite ?></textarea> </td>
+                    <td class="qteForfait"><textarea name="quantite" rows=1 cols=2><?php echo $quantite ?></textarea> </td>
                     <?php
                 }
                 ?>
@@ -69,18 +45,36 @@
             <tr>
                 <th class="date">Date</th>
                 <th class="libelle">Libellé</th>
-                <th class='montant'>Montant</th> 
+                <th class='montant'>Montant</th>
+                <th></th>
             </tr>
             <?php
             foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+                $idFraisHorsForfait = $unFraisHorsForfait['id'];
                 $date = $unFraisHorsForfait['date'];
                 $libelle = $unFraisHorsForfait['libelle'];
                 $montant = $unFraisHorsForfait['montant'];
                 ?>
                 <tr>
-                    <td><TEXTAREA type="date" name="date" rows=1 cols=10><?php echo $date ?></textarea></td>
-                    <td><TEXTAREA name="libelle" rows=2 cols=20><?php echo $libelle ?></textarea></td>
-                    <td><TEXTAREA name="montant" rows=1 cols=10><?php echo $montant ?></textarea></td>                    
+                    <td><?php echo $date ?></td>
+                    <td><?php echo $libelle ?></td>
+                    <td><?php echo $montant ?></td>
+                
+                    <td>
+                        <form action="index.php?uc=validerfrais&action=supprimerFraisHorsForfais" method="post">
+                        <input type="hidden" name="id" value="<?php echo $idFraisHorsForfait ?>"/>
+                        <input type="hidden" name="libellefraishorsforfait" value="<?php echo $libelle ?>"/>
+                        <input type="hidden" name="visiteur" value="<?php echo $idVisiteur ?>" />
+                        <input type="hidden" name="mois" value="<?php echo $leMois ?>" />
+                        <input type="submit" name="supprimer" value="Supprimer"> 
+                </form> 
+                </td>
+                
+                
+                
+                <td>
+                    <input type="submit" name="<?php $unFraisHorsForfait['id'] ?>" value="Reporter Le Frais"> </td>
+
                 </tr>
 
                 <?php
@@ -92,4 +86,6 @@
 </div>
 
 </div>
+
+
 

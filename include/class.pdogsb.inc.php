@@ -166,6 +166,28 @@ class PdoGsb {
     }
 
     /**
+     * Met à jour la table ligneFraisForfaitHorsForfait
+
+     * Met à jour la table ligneFraisForfaitHorsForfait pour une id et
+     * Ajoute REFUSER au libelle de la ligne
+
+     * @param $idFraisHorsForfait
+     * @param $libelle libelle du FraisHorsForfait a changer
+     * @return un tableau associatif 
+     */
+    public function majSuppressionLigneFraisForfaitHorsForfait($idFraisHorsForfait, $libelle) {
+        if (substr($libelle, 0, 7) != "REFUSER") {
+            $nouveauLibelle = "REFUSER" . $libelle;
+            if (strlen($nouveauLibelle) >= 100) {
+                $nouveauLibelle = substr($nouveauLibelle, 0, 100);
+            }
+            $req = "update lignefraishorsforfait set lignefraishorsforfait.libelle = '$nouveauLibelle' 
+			where lignefraishorsforfait.id = '$idFraisHorsForfait' ";
+            PdoGsb::$monPdo->exec($req);
+        }
+    }
+
+    /**
      * met à jour le nombre de justificatifs de la table ficheFrais
      * pour le mois et le visiteur concerné
 
@@ -318,7 +340,7 @@ class PdoGsb {
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
         PdoGsb::$monPdo->exec($req);
     }
-    
+
     /**
      * Recupere les infos de la table etat
 

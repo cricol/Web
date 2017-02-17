@@ -52,7 +52,8 @@ switch ($action) {
             include("vues/comptable/v_modifFicheFrais.php");
             break;
         }
-    case 'envoiModif': {
+    case 'supprimerFraisHorsForfais': {
+            $pdo->majSuppressionLigneFraisForfaitHorsForfait($_POST['id'], $_POST['libellefraishorsforfait']);
             $idVisiteur = $_POST['visiteur'];
             $leMois = $_POST['mois'];
             $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
@@ -68,8 +69,28 @@ switch ($action) {
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
             $dateModif = $lesInfosFicheFrais['dateModif'];
             $dateModif = dateAnglaisVersFrancais($dateModif);
-
+            $lesEtats = $pdo->getTableEtat();
             include("vues/comptable/v_modifFicheFrais.php");
+            break;
+        }
+    case 'reporterunFrais': {
+            $idVisiteur = $_POST['visiteur'];
+              $leMois = $_POST['mois'];
+              $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
+              $moisASelectionner = $leMois;
+              include("vues/comptable/v_validerVisiteur.php");
+              $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
+              $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
+              $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+              $numAnnee = substr($leMois, 0, 4);
+              $numMois = substr($leMois, 4, 2);
+              $libEtat = $lesInfosFicheFrais['libEtat'];
+              $montantValide = $lesInfosFicheFrais['montantValide'];
+              $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
+              $dateModif = $lesInfosFicheFrais['dateModif'];
+              $dateModif = dateAnglaisVersFrancais($dateModif);
+
+              include("vues/comptable/v_modifFicheFrais.php"); 
             break;
         }
 }
