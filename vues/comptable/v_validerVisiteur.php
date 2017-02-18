@@ -8,9 +8,9 @@
                     <?php
                     foreach ($lesVisiteurs as $visiteur) {
                         if ($visiteur['fonction'] == 1) {
-                            if ($visiteur['id'] == str_replace(' ', '', $idVisiteur) ) {
+                            if ($visiteur['id'] == str_replace(' ', '', $VisiteurSelectionner) ) {
                                 ?>
-                                <option value="<?php echo $visiteur['id'] ?>" selected " ><?php echo $visiteur['nom'] . " " . $visiteur['prenom'] ?></option> 
+                                <option value="<?php echo $visiteur['id'] ?>" selected  ><?php echo $visiteur['nom'] . " " . $visiteur['prenom'] ?></option> 
                                 <?php
                             } else {
                                 ?>
@@ -51,13 +51,14 @@
                 </select>
             </p>
             </p>
+                
         </div>
 
         <div class="piedForm">
             <p>
                 <input id="ok" type="submit" value="Valider" size="20" />
-                <input id="annuler" type="reset" value="Effacer" size="20" />
+                
             </p> 
         </div>
-    </form>
-
+  
+</form>

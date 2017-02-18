@@ -17,10 +17,10 @@
  */
 class PdoGsb {
 
-    private static $serveur = 'mysql:host=db669148864.db.1and1.com';
-    private static $bdd = 'dbname=db669148864';
-    private static $user = 'dbo669148864';
-    private static $mdp = 'czCQuuir3QiLuVHS';
+    private static $serveur = 'mysql:host=localhost';
+    private static $bdd = 'dbname=gsbV2';
+    private static $user = 'root';
+    private static $mdp = '';
     private static $monPdo;
     private static $monPdoGsb = null;
 
@@ -166,6 +166,28 @@ class PdoGsb {
     }
 
     /**
+     * Met à jour la table ligneFraisForfaitHorsForfait
+
+     * Met à jour la table ligneFraisForfaitHorsForfait pour une id et
+     * Ajoute REFUSER au libelle de la ligne
+
+     * @param $idFraisHorsForfait
+     * @param $libelle libelle du FraisHorsForfait a changer
+     * @return un tableau associatif 
+     */
+    public function majSuppressionLigneFraisForfaitHorsForfait($idFraisHorsForfait, $libelle) {
+        if (substr($libelle, 0, 7) != "REFUSER") {
+            $nouveauLibelle = "REFUSER" . $libelle;
+            if (strlen($nouveauLibelle) >= 100) {
+                $nouveauLibelle = substr($nouveauLibelle, 0, 100);
+            }
+            $req = "update lignefraishorsforfait set lignefraishorsforfait.libelle = '$nouveauLibelle' 
+			where lignefraishorsforfait.id = '$idFraisHorsForfait' ";
+            PdoGsb::$monPdo->exec($req);
+        }
+    }
+
+    /**
      * met à jour le nombre de justificatifs de la table ficheFrais
      * pour le mois et le visiteur concerné
 
@@ -305,6 +327,18 @@ class PdoGsb {
         $laLigne = $res->fetch();
         return $laLigne;
     }
+    /**
+     * Retourne les informations d'une fiche de frais
+
+     * @return un tableau avec des champs de jointure entre une fiche de frais et la ligne d'état 
+     */
+    public function getToutesLesFichesFrais() {
+        $req = "select * from  fichefrais inner join etat on fichefrais.idEtat = etat.id 
+                order by idEtat DESC";
+        $res = PdoGsb::$monPdo->query($req);
+        $laLigne = $res->fetchAll();
+        return $laLigne;
+    }
 
     /**
      * Modifie l'état et la date de modification d'une fiche de frais
@@ -314,9 +348,22 @@ class PdoGsb {
      * @param $mois sous la forme aaaamm
      */
     public function majEtatFicheFrais($idVisiteur, $mois, $etat) {
-        $req = "update ficheFrais set idEtat = '$etat', dateModif = now() 
+        $req = "update fichefrais set idEtat = '$etat', dateModif = now() 
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
         PdoGsb::$monPdo->exec($req);
+    }
+
+    /**
+     * Recupere les infos de la table etat
+
+     * @return un tableau avec les infos de la table etat
+     */
+    public function getTableEtat() {
+        $req = "SELECT *
+                FROM etat";
+        $res = PdoGsb::$monPdo->query($req);
+        $laLigne = $res->fetchAll();
+        return $laLigne;
     }
 
 }
