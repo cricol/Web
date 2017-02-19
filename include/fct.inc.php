@@ -1,5 +1,6 @@
-﻿<?php
-/**
+<?php
+
+/** 
  * Fonctions pour l'application GSB
 
  * @package default
@@ -209,7 +210,7 @@ function valideInfosFrais($dateFrais, $libelle, $montant) {
  */
 function ajouterErreur($msg) {
     if (!isset($_REQUEST['erreurs'])) {
-        $_REQUEST['erreurs'] = array();
+        $_REQUEST['erreurs'] = [];
     }
     $_REQUEST['erreurs'][] = $msg;
 }

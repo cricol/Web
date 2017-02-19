@@ -1,6 +1,6 @@
 <div id="contenu">
     <h2>Validation des frais par visiteur</h2>
-    <form action="index.php?uc=validerfrais&action=afficheFraisaValider" method="POST">
+    <form action="index.php?uc=suiviPaiement&action=afficheFraisaValider" method="POST">
         <div class="corpsForm">
 
             <p>
