@@ -62,8 +62,7 @@
                 $montant = $unFraisHorsForfait['montant'];
                 
                 if ($debutLibelle != "REFUSER") {
-                    ?>
-              
+                    ?>              
                        
                 <tr>
                     <td><?php echo $date ?></td>
