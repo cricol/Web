@@ -31,7 +31,7 @@
                     foreach ($lesFraisForfait as $unFraisForfait) {
                         $quantite = $unFraisForfait['quantite'];
                         ?>
-                        <td class="qteForfait"><input type="text" name="quantite[<?php echo $unFraisForfait['idfrais'] ?>]" value="<?php echo $quantite ?>"> </td>
+                        <td><input size="10" autofocus type="text" name="quantite[<?php echo $unFraisForfait['idfrais'] ?>]" value="<?php echo $quantite ?>"> </td>
                         <?php
                     }
                     ?>
@@ -58,8 +58,13 @@
                 $idFraisHorsForfait = $unFraisHorsForfait['id'];
                 $date = $unFraisHorsForfait['date'];
                 $libelle = $unFraisHorsForfait['libelle'];
+                $debutLibelle = substr($libelle, 0, 7);
                 $montant = $unFraisHorsForfait['montant'];
-                ?>
+                
+                if ($debutLibelle != "REFUSER") {
+                    ?>
+              
+                       
                 <tr>
                     <td><?php echo $date ?></td>
                     <td><?php echo $libelle ?></td>
@@ -74,15 +79,28 @@
                             <input type="submit" name="supprimer" value="Supprimer"> 
                         </form> 
 
-                        <input type="submit" name="<?php $unFraisHorsForfait['id'] ?>" value="Reporter Le Frais"> </td>
-
+                        <form action="index.php?uc=modifierFrais&action=reporterunFrais" method="post">
+                            <input type="hidden" name="id" value="<?php echo $idFraisHorsForfait ?>"/>
+                            <input type="hidden" name="libellefraishorsforfait" value="<?php echo $libelle ?>"/>
+                            <input type="hidden" name="montant" value="<?php echo $montant ?>"/>
+                            <input type="hidden" name="date" value="<?php echo $date ?>"/>
+                            <input type="hidden" name="visiteur" value="<?php echo $VisiteurSelectionner ?>" />
+                            <input type="hidden" name="mois" value="<?php echo $leMois ?>" />
+                            <input type="submit" name="<?php $unFraisHorsForfait['id'] ?>" value="Reporter Le Frais"> </td>
+                        </form>
                 </tr>
 
                 <?php
+                  }
             }
             ?>
 
         </table>
+        <form action="index.php?uc=modifierFrais&action=ficheDeFraisValider" method="post">
+            <input type="hidden" name="visiteur" value="<?php echo $VisiteurSelectionner ?>" />
+            <input type="hidden" name="mois" value="<?php echo $leMois ?>" />
+            <input type="submit" name="valider" value="Passer la Fiche de Frais en Validee">
+        </form>
     <?php } ?>
 </div>
 

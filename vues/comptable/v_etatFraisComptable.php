@@ -22,7 +22,7 @@
                     foreach ($lesFraisForfait as $unFraisForfait) {
                         $libelle = $unFraisForfait['libelle'];
                         ?>	
-                    <th> <?php echo $libelle ?></th>
+                        <th> <?php echo $libelle ?></th>
                         <?php
                     }
                     ?> 
@@ -33,7 +33,7 @@
                     foreach ($lesFraisForfait as $unFraisForfait) {
                         $quantite = $unFraisForfait['quantite'];
                         ?>
-                        <td class="qteForfait"><?php echo $quantite ?> </td>
+                        <td><?php echo $quantite ?> </td>
                         <?php
                     }
                     ?>
@@ -52,15 +52,19 @@
                 foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
                     $date = $unFraisHorsForfait['date'];
                     $libelle = $unFraisHorsForfait['libelle'];
+                    $debutLibelle = substr($libelle, 0, 7);
                     $montant = $unFraisHorsForfait['montant'];
-                    ?>
-                    <tr>
-                        <td><?php echo $date ?></td>
-                        <td><?php echo $libelle ?></td>
-                        <td><?php echo $montant ?></td>                    
-                    </tr>
 
-                    <?php
+                    if ($debutLibelle != "REFUSER") {
+                        ?>
+                        <tr>
+                            <td><?php echo $date ?></td>
+                            <td><?php echo $libelle ?></td>
+                            <td><?php echo $montant ?></td>                    
+                        </tr>
+
+                        <?php
+                    }
                 }
                 ?>
 

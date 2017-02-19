@@ -7,16 +7,15 @@
 
         <?php
         //Si il n'y a pas de fiche de frais affiche "Pas de fiche " sinon affiche les frais
-        if (!$lesFraisForfait || $libEtat != 'Validée et mise en paiement') {
+        if ((!$lesFraisForfait) || ($libEtat != 'Validée et mise en paiement')) {
             ?>
             <h1>Pas de fiche de frais pour ce visiteur ce mois</h1>
-        <?php } 
-        
-        else {
+            <?php
+        } else {
             ?>
             <h3> Situation de la Fiche de Frais : <?php echo $libEtat ?></h3>
             <input type="hidden" name="visiteur" value="<?php echo $VisiteurSelectionner ?>" />
-        <input type="hidden" name="mois" value="<?php echo $leMois ?>" />
+            <input type="hidden" name="mois" value="<?php echo $leMois ?>" />
             <input id="ok" type="submit" value="Mise en Paiment de la Fiche de Frais" size="20" />  
             <caption><h3>Eléments forfaitisés</h3></caption>
             <table class="listeLegere">
@@ -55,15 +54,19 @@
                 foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
                     $date = $unFraisHorsForfait['date'];
                     $libelle = $unFraisHorsForfait['libelle'];
+                    $debutLibelle = substr($libelle, 0, 7);
                     $montant = $unFraisHorsForfait['montant'];
-                    ?>
-                    <tr>
-                        <td><?php echo $date ?></td>
-                        <td><?php echo $libelle ?></td>
-                        <td><?php echo $montant ?></td>                    
-                    </tr>
 
-                    <?php
+                    if ($debutLibelle != "REFUSER") {
+                        ?>
+                        <tr>
+                            <td><?php echo $date ?></td>
+                            <td><?php echo $libelle ?></td>
+                            <td><?php echo $montant ?></td>                    
+                        </tr>
+
+                        <?php
+                    }
                 }
                 ?>
 

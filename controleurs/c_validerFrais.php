@@ -32,6 +32,10 @@ switch ($action) {
             include("vues/comptable/v_etatFraisComptable.php");
             break;
         }
+    default : {
+            include("vues/comptable/v_sommaireComptable.php");
+            break;
+        }
 }
 ?>
 

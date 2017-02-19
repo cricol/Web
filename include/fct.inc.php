@@ -1,6 +1,6 @@
 <?php
 
-/** 
+/**
  * Fonctions pour l'application GSB
 
  * @package default
@@ -68,15 +68,16 @@ function dateAnglaisVersFrancais($maDate) {
 function getMois($date) {
     @list($jour, $mois, $annee) = explode('/', $date);
     if (strlen($mois) == 1) {
-        $mois = "0" . $mois;
+        $mois += "0";
     }
     return $annee . $mois;
 }
 
 /**
- * retourne le mois au format aaaamm selon le jour dans le mois
-  si debut du mois prend le mois precedent sinon prend le mois
-  courrant
+ *Retourne le mois au format aaaamm selon le jour dans le mois
+ *si debut du mois prend le mois precedent sinon prend le mois
+ *courrant
+ 
  * @param $date au format  jj/mm/aaaa
  * @return le mois au format aaaamm
  */
@@ -84,15 +85,32 @@ function getMoisComptable($date) {
     @list($jour, $mois, $annee) = explode('/', $date);
 
     if ($jour < "10") {
-        $date = date("d/m/Y", strtotime("-1 month"));
+        $date = modifieLaDate(date("d/m/Y"), "-1 month");
         @list($jour, $mois, $annee) = explode('/', $date);
     }
 
     if (strlen($mois) == 1) {
-        $mois = "0" . $mois;
+        $mois += "0";
     }
 
-    return  $annee . $mois ;
+    return $annee . $mois;
+}
+
+/**
+ * Ajoute ou soustrait une date a la date du jour
+ 
+   
+ * @param $date au format  jj/mm/aaaa
+ * @param nbAjouter au format texte avec en debut "+" ou "-" suivie du nombre a ajouter ou soustraire puis de "years", "month" ou "days" selon les besoins *        
+ * @return le mois au format aaaamm
+ */
+function modifieLaDate($date, $nbAjouter) {
+    //ex pour ajouter un mois $nbmois doit etre egale a "+1 month" ou pour ajouter une annee "+1 years" ou encors "+1 days" pour un jour
+    $date = date("d/m/Y", strtotime($nbAjouter));
+
+    @list($jour, $mois, $annee) = explode('/', $date);
+
+    return $annee . $mois;
 }
 
 /* gestion des erreurs */
@@ -227,4 +245,5 @@ function nbErreurs() {
         return count($_REQUEST['erreurs']);
     }
 }
+
 ?>

@@ -14,7 +14,6 @@
                             $tmpMoisDouble = array($uneFicheFrais['mois']);
                             $tmpMois = array($uneFicheFrais['mois']);
 
-
                             $mois = $uneFicheFrais['mois'];
                             $numAnnee = substr($uneFicheFrais['mois'], 0, 4);
                             $numMois = substr($uneFicheFrais['mois'], 4, 6);
@@ -30,9 +29,9 @@
 
                         if ($uneFicheFrais['libelle'] == 'Validée et mise en paiement') {
                             array_push($tmpMois, $uneFicheFrais['mois']);
-                            if (array_diff($tmpMois, $tmpMoisDouble) != null) {
+                            $diff = array_diff($tmpMois, $tmpMoisDouble);
+                            if ($diff != null) {
                                 array_push($tmpMoisDouble, $uneFicheFrais['mois']);
-
 
                                 $mois = $uneFicheFrais['mois'];
                                 $numAnnee = substr($uneFicheFrais['mois'], 0, 4);
@@ -60,7 +59,8 @@
                     <?php
                     foreach ($lesVisiteurs as $unvisiteur) {
                         if ($unvisiteur['fonction'] == 1) {
-                            if ($unvisiteur['id'] == str_replace(' ', '', $VisiteurSelectionner)) {
+                            $VisiteurSelectionner = str_replace(' ', '', $VisiteurSelectionner);
+                            if ($unvisiteur['id'] == $VisiteurSelectionner) {
                                 ?>
                                 <option selected value="<?php echo $unvisiteur['id'] ?>"   ><?php echo $unvisiteur['nom'] . " " . $unvisiteur['prenom'] ?></option> 
                                 <?php

@@ -1,4 +1,5 @@
 <?php
+
 include("vues/comptable/v_sommaireComptable.php");
 
 $lesVisiteurs = $pdo->getVisiteur();
@@ -56,5 +57,8 @@ switch ($action) {
             include("vues/comptable/v_miseEnPaiement.php");
             break;
         }
-
+    default : {
+            include("vues/comptable/v_sommaireComptable.php");
+            break;
+        }
 }
