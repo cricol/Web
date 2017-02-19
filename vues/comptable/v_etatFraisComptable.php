@@ -3,7 +3,7 @@
 </h3>
 
 <div class="encadre">
-    <form  action="index.php?uc=validerfrais&action=ModifFichierFrais" method="POST"> 
+    <form  action="index.php?uc=modifierFrais&action=ModifFichierFrais" method="POST"> 
         <input type="hidden" name="visiteur" value="<?php echo $VisiteurSelectionner ?>" />
         <input type="hidden" name="mois" value="<?php echo $leMois ?>" />
         <h3> Situation de la Fiche de Frais : <?php echo $libEtat ?></h3>
@@ -22,7 +22,7 @@
                     foreach ($lesFraisForfait as $unFraisForfait) {
                         $libelle = $unFraisForfait['libelle'];
                         ?>	
-                        <th> <?php echo $libelle ?></th>
+                    <th> <?php echo $libelle ?></th>
                         <?php
                     }
                     ?> 

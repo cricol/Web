@@ -3,7 +3,7 @@
 </h3>
 
 <div class="encadre">
-    <form  action="index.php?uc=validerfrais&action=miseEnPaiement" method="POST"> 
+    <form  action="index.php?uc=suiviPaiement&action=miseEnPaiement" method="POST"> 
 
         <?php
         //Si il n'y a pas de fiche de frais affiche "Pas de fiche " sinon affiche les frais

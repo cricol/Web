@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * Classe d'accès aux données. 
 
@@ -159,8 +158,8 @@ class PdoGsb {
         foreach ($lesCles as $unIdFrais) {
             $qte = $lesFrais[$unIdFrais];
             $req = "update lignefraisforfait set lignefraisforfait.quantite = $qte
-			where lignefraisforfait.idvisiteur = '$idVisiteur' and lignefraisforfait.mois = '$mois'
-			and lignefraisforfait.idfraisforfait = '$unIdFrais'";
+			where lignefraisforfait.idVisiteur = '$idVisiteur' and lignefraisforfait.mois = '$mois'
+			and lignefraisforfait.idFraisForfait = '$unIdFrais'";
             PdoGsb::$monPdo->exec($req);
         }
     }
@@ -296,17 +295,17 @@ class PdoGsb {
         $req = "select fichefrais.mois as mois from  fichefrais where fichefrais.idVisiteur ='$idVisiteur' 
 		order by fichefrais.mois desc ";
         $res = PdoGsb::$monPdo->query($req);
-        $lesMois = array();
+        $lesMois = [];
         $laLigne = $res->fetch();
         while ($laLigne != null) {
             $mois = $laLigne['mois'];
             $numAnnee = substr($mois, 0, 4);
             $numMois = substr($mois, 4, 2);
-            $lesMois["$mois"] = array(
+            $lesMois["$mois"] = [
                 "mois" => "$mois",
                 "numAnnee" => "$numAnnee",
                 "numMois" => "$numMois"
-            );
+            ];
             $laLigne = $res->fetch();
         }
         return $lesMois;
