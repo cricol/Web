@@ -29,11 +29,11 @@ switch ($action) {
             $nbJustificatifs = $lesInfosFicheFrais['nbJustificatifs'];
             $dateModif = $lesInfosFicheFrais['dateModif'];
             $dateModif = dateAnglaisVersFrancais($dateModif);
-            include("vues/comptable/v_etatFraisComptable.php");
-            break;
-        }
-    default : {
-            include("vues/comptable/v_sommaireComptable.php");
+            if (!$lesFraisForfait) {
+                include("vues/comptable/v_erreurPasDeFrais.php");
+            } else {
+                include("vues/comptable/v_modifFicheFrais.php");
+            }
             break;
         }
 }

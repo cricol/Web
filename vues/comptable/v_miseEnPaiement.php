@@ -14,9 +14,7 @@
         } else {
             ?>
             <h3> Situation de la Fiche de Frais : <?php echo $libEtat ?></h3>
-            <input type="hidden" name="visiteur" value="<?php echo $VisiteurSelectionner ?>" />
-            <input type="hidden" name="mois" value="<?php echo $leMois ?>" />
-            <input id="ok" type="submit" value="Mise en Paiment de la Fiche de Frais" size="20" />  
+             
             <caption><h3>Eléments forfaitisés</h3></caption>
             <table class="listeLegere">
                 <tr>

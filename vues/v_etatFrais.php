@@ -4,8 +4,6 @@
 <div class="encadre">
     <p>
         Etat : <?php echo $libEtat ?> depuis le <?php echo $dateModif ?> <br> Montant validé : <?php echo $montantValide ?>
-
-
     </p>
     <table class="listeLegere">
         <caption>Eléments forfaitisés </caption>
@@ -38,20 +36,23 @@
             <th class="libelle">Libellé</th>
             <th class='montant'>Montant</th>                
         </tr>
-<?php
-foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
-    $date = $unFraisHorsForfait['date'];
-    $libelle = $unFraisHorsForfait['libelle'];
-    $montant = $unFraisHorsForfait['montant'];
-    ?>
-            <tr>
-                <td><?php echo $date ?></td>
-                <td><?php echo $libelle ?></td>
-                <td><?php echo $montant ?></td>
-            </tr>
-    <?php
-}
-?>
+        <?php
+        foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+            $date = $unFraisHorsForfait['date'];
+            $libelle = $unFraisHorsForfait['libelle'];
+            $montant = $unFraisHorsForfait['montant'];
+            $debutLibelle = substr($libelle, 0, 7);
+            if ($debutLibelle != 'REFUSER') {
+                ?>
+                <tr>
+                    <td><?php echo $date ?></td>
+                    <td><?php echo $libelle ?></td>
+                    <td><?php echo $montant ?></td>
+                </tr>
+                <?php
+            }
+        }
+        ?>
     </table>
 </div>
 </div>

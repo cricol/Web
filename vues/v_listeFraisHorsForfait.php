@@ -17,7 +17,7 @@
         $id = $unFraisHorsForfait['id'];
         ?>		
         <tr>
-            <td> <?php echo $date ?></td>
+            <td><?php echo $date ?></td>
             <td><?php echo $libelle ?></td>
             <td><?php echo $montant ?></td>
             <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
