@@ -364,6 +364,49 @@ class PdoGsb {
         $laLigne = $res->fetchAll();
         return $laLigne;
     }
+    /**
+     * Recupere le type de vehicule et le prix selon la fiche de frais du visiteur et du mois
+
+     * @param $idVisiteur 
+     * @param $leMois sous la forme aaaamm
+     * @return un tableau avec les infos de la table typevehicule
+     */
+    public function getVehicule($idVisiteur, $leMois) {
+        $req = "SELECT typevehicule.libelle as libelle, typevehicule.prix as prix, typevehicule.id as idVehicule
+                FROM typevehicule
+                INNER JOIN fichefrais ON fichefrais.typeVehicule = typevehicule.id
+                WHERE fichefrais.mois = '$leMois' AND fichefrais.idVisiteur = '$idVisiteur'";
+        $res = PdoGsb::$monPdo->query($req);
+        $laLigne = $res->fetch();
+        return $laLigne;
+    }
+    
+    /**
+     * Modifie l'ID du vehicule utiliser pour la fiche de frais en fonction du visiteur et du mois
+     * et change la date de modification
+     * Modifie le champ idVehicule 
+     * @param $idVisiteur 
+     * @param $nouvelleID  
+     * @param $leMois sous la forme aaaamm
+     */
+    public function majVehiculeFicheFrais($idVisiteur, $leMois, $nouvelleID) {
+        $req = "update fichefrais set typeVehicule = '$nouvelleID', dateModif = now() 
+		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$leMois'";
+        PdoGsb::$monPdo->exec($req);
+    }
+    
+    /**
+     * Recupere les infos de la table etat
+
+     * @return un tableau avec les infos de la table etat
+     */
+    public function getTableVehicule() {
+        $req = "SELECT *
+                FROM typevehicule";
+        $res = PdoGsb::$monPdo->query($req);
+        $laLigne = $res->fetchAll();
+        return $laLigne;
+    }
 
 }
 ?>

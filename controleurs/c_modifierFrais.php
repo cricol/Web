@@ -16,6 +16,8 @@ switch ($action) {
     case 'ActualiserFichierFrais': {
             $moisASelectionner = $leMois;
             include("vues/comptable/v_validerVisiteur.php");
+            $nouvelleID = $_POST['lstVehicule'];
+            $pdo->majVehiculeFicheFrais($VisiteurSelectionner, $leMois, $nouvelleID);
             $pdo->majFraisForfait($VisiteurSelectionner, $leMois, $_POST['quantite']);
             break;
         }
@@ -49,6 +51,8 @@ switch ($action) {
 
         }
 }
+$lesVehicules = $pdo->getTableVehicule();
+$idVehicule = $pdo->getVehicule($VisiteurSelectionner, $leMois);
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($VisiteurSelectionner, $leMois);
 $lesFraisForfait = $pdo->getLesFraisForfait($VisiteurSelectionner, $leMois);
 $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($VisiteurSelectionner, $leMois);

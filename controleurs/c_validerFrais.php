@@ -16,6 +16,8 @@ switch ($action) {
     case 'validerSelectionVisiteur': {
             $VisiteurSelectionner = $_POST['choiVisiteur'];
             $leMois = $_POST['choiMois'];
+            $lesVehicules = $pdo->getTableVehicule();
+            $idVehicule = $pdo->getVehicule($VisiteurSelectionner, $leMois);
             $lesMois = $pdo->getLesMoisDisponibles($VisiteurSelectionner);
             $moisASelectionner = $leMois;
             include("vues/comptable/v_validerVisiteur.php");

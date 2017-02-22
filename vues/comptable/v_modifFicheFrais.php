@@ -16,7 +16,7 @@
                 <?php
             }
             ?> 
-
+            <th>Type de Vehicule</th>
         </tr>
         <form action="index.php?uc=modifierFrais&action=ActualiserFichierFrais" method="post">
             <tr>
@@ -24,11 +24,29 @@
                 foreach ($lesFraisForfait as $unFraisForfait) {
                     $quantite = $unFraisForfait['quantite'];
                     ?>
-                    <td><input size="10" autofocus type="text" name="quantite[<?php echo $unFraisForfait['idfrais'] ?>]" value="<?php echo $quantite ?>"> </td>
+                <td><input size="7" autofocus type="text" name="quantite[<?php echo $unFraisForfait['idfrais'] ?>]" value="<?php echo $quantite ?>"> </td>
                     <?php
                 }
                 ?>
 
+                <td>
+                    <select id="lstVehicule" name="lstVehicule">
+                    <?php
+                    foreach ($lesVehicules as $unVehicule) {
+                        $idVoitureVisiteur = $idVehicule['idVehicule'];
+                            if ($unVehicule['id'] == $idVoitureVisiteur) {
+                                ?> 
+                                <option selected value="<?php echo $unVehicule['id'] ?>"><?php echo $unVehicule['libelle'] ?> </option>
+                                <?php
+                            } else {
+                                ?>                    
+                                <option value="<?php echo $unVehicule['id'] ?>"><?php echo $unVehicule['libelle'] ?> </option>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </select>
+                </td>
             </tr>            
     </table>
     <input type="hidden" name="choiVisiteur" value="<?php echo $VisiteurSelectionner ?>" />

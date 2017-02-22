@@ -14,6 +14,8 @@ switch ($action) {
             break;
         }
     case 'validerMajFraisForfait': {
+            $nouvelleID = $_POST['lstVehicule'];
+            $pdo->majVehiculeFicheFrais($idVisiteur, $mois, $nouvelleID);
             $lesFrais = $_REQUEST['lesFrais'];
             if (lesQteFraisValides($lesFrais)) {
                 $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
@@ -41,6 +43,8 @@ switch ($action) {
             break;
         }
 }
+$lesVehicules = $pdo->getTableVehicule();
+$idVehicule = $pdo->getVehicule($idVisiteur, $mois);
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
 include("vues/v_listeFraisForfait.php");

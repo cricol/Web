@@ -21,8 +21,23 @@
                     <?php
                 }
                 ?>
-
-
+                <label for="idFrais">Type de Vehicule</label>
+                <select id="lstVehicule" name="lstVehicule">
+                    <?php
+                    foreach ($lesVehicules as $unVehicule) {
+                        $idVoitureVisiteur = $idVehicule['idVehicule'];
+                        if ($unVehicule['id'] == $idVoitureVisiteur) {
+                            ?>                        
+                            <option selected value="<?php echo $unVehicule['id'] ?>"><?php echo $unVehicule['libelle'] ?> </option>
+                            <?php
+                        } else {
+                            ?>                    
+                            <option value="<?php echo $unVehicule['id'] ?>"><?php echo $unVehicule['libelle'] ?> </option>
+                            <?php
+                        }
+                    }
+                    ?>
+                </select>
 
 
 
