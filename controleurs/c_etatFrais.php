@@ -19,10 +19,12 @@ switch ($action) {
             $lesMois = $pdo->getLesMoisDisponibles($idVisiteur);
             $moisASelectionner = $leMois;
             include("vues/v_listeMois.php");
+            $lesVehicules = $pdo->getTableVehicule();
+            $idVehicule = $pdo->getVehicule($idVisiteur, $leMois);
             $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $leMois);
             $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $leMois);
-            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);  
-            $idVehicule= $pdo->getVehicule($idVisiteur, $leMois);
+            $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $leMois);
+            $idVehicule = $pdo->getVehicule($idVisiteur, $leMois);
             $numAnnee = substr($leMois, 0, 4);
             $numMois = substr($leMois, 4, 2);
             $libEtat = $lesInfosFicheFrais['libEtat'];

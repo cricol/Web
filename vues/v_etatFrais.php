@@ -8,25 +8,48 @@
     <table class="listeLegere">
         <caption>Eléments forfaitisés </caption>
         <tr>
-            <?php
-            foreach ($lesFraisForfait as $unFraisForfait) {
-                $libelle = $unFraisForfait['libelle'];
-                ?>	
-                <th> <?php echo $libelle ?></th>
-                <?php
-            }
-            ?>
+            <th>Frais Forfaitaires</th>
+            <th>Quantité</th>
+            <th>Montant unitaire</th>
+            <th>Total</th>
         </tr>
-        <tr>
+
+        <td>Type de Vehicule : <?php echo $idVehicule['libelle'] ?>
             <?php
-            foreach ($lesFraisForfait as $unFraisForfait) {
-                $quantite = $unFraisForfait['quantite'];
+            $prixKm = $idVehicule['prix'];
+            ?>                    
+
+        </td>
+        <?php
+        foreach ($lesFraisForfait as $unFraisForfait) {
+            $quantite = $unFraisForfait['quantite'];
+            $libelle = $unFraisForfait['libelle'];
+            $prixunitaire = $unFraisForfait['prix'];
+            $total = $quantite * $prixunitaire;
+            $totalKm = $quantite * $prixKm;
+            ?>
+            <tr>
+                <td><?php echo $libelle ?> </td>
+                <td><?php echo $quantite ?></td>
+                <?php
+                if ($libelle == 'Nombre Kilometre') {
+                    ?>
+                    <td><?php echo $prixKm ?> </td>
+                    <td><?php echo $totalKm ?> </td>
+                    <?php
+                } else {
+                    ?>
+                    <td><?php echo $prixunitaire ?></td>
+                    <td><?php echo $total ?></td>
+                    <?php
+                }
                 ?>
-                <td class="qteForfait"><?php echo $quantite ?> </td>
+
                 <?php
             }
             ?>
-        </tr>
+
+        </tr> 
     </table>
     <table class="listeLegere">
         <caption>Descriptif des éléments hors forfait -<?php echo $nbJustificatifs ?> justificatifs reçus -
