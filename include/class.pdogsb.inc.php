@@ -16,10 +16,10 @@
  */
 class PdoGsb {
 
-    private static $serveur = 'mysql:host=localhost';
+    private static $serveur = 'mysql:host=192.168.0.40';
     private static $bdd = 'dbname=gsbV2';
     private static $user = 'root';
-    private static $mdp = '';
+    private static $mdp = 'spawn';
     private static $monPdo;
     private static $monPdoGsb = null;
 
@@ -120,7 +120,7 @@ class PdoGsb {
      * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif 
      */
     public function getLesFraisForfait($idVisiteur, $mois) {
-        $req = "select fraisforfait.id as idfrais, fraisforfait.libelle as libelle, 
+        $req = "select fraisforfait.id as idfrais, fraisforfait.libelle as libelle, fraisforfait.montant as prix,
 		lignefraisforfait.quantite as quantite from lignefraisforfait 
                 inner join fraisforfait on fraisforfait.id = lignefraisforfait.idFraisForfait
 		where lignefraisforfait.idVisiteur ='$idVisiteur' and lignefraisforfait.mois='$mois' 
@@ -155,11 +155,11 @@ class PdoGsb {
      */
     public function majFraisForfait($idVisiteur, $mois, $lesFrais) {
         $lesCles = array_keys($lesFrais);
-        foreach ($lesCles as $unIdFrais) {
-            $qte = $lesFrais[$unIdFrais];
+        foreach ($lesCles as $uneQteFrais) {
+            $qte = $lesFrais[$uneQteFrais];
             $req = "update lignefraisforfait set lignefraisforfait.quantite = $qte
 			where lignefraisforfait.idVisiteur = '$idVisiteur' and lignefraisforfait.mois = '$mois'
-			and lignefraisforfait.idFraisForfait = '$unIdFrais'";
+			and lignefraisforfait.idFraisForfait = '$uneQteFrais'";
             PdoGsb::$monPdo->exec($req);
         }
     }
