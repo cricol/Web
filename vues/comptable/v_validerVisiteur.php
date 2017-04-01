@@ -30,6 +30,7 @@
                         <option selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>
                         <?php
                     } else {
+                        
                         foreach ($lesMois as $unMois) {
                             $mois = $unMois['mois'];
                             $numAnnee = $unMois['numAnnee'];
