@@ -6,6 +6,7 @@
     <h3> Situation de la Fiche de Frais : <?php echo $libEtat ?></h3>
 
     <label>Type de Vehicule :</label>
+    <form action="index.php?uc=modifierFrais&action=ActualiserFichierFrais" method="post">
     <select id="lstVehicule" name="lstVehicule">
         <?php
         foreach ($lesVehicules as $unVehicule) {
@@ -15,6 +16,7 @@
                 <option selected value="<?php echo $unVehicule['id'] ?>"><?php echo $unVehicule['libelle'] ?> </option>
                 <?php
                 $prixKm = $unVehicule['prix'];
+                $idVoitureVisiteur = $unVehicule['id'];
             } else {
                 ?>                    
                 <option value="<?php echo $unVehicule['id'] ?>"><?php echo $unVehicule['libelle'] ?> </option>
@@ -32,7 +34,7 @@
             <th>Montant unitaire</th>
             <th>Total</th>
         </tr>
-        <form action="index.php?uc=modifierFrais&action=ActualiserFichierFrais" method="post">
+        
 
             <?php
             foreach ($lesFraisForfait as $unFraisForfait) {

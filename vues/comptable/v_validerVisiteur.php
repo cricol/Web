@@ -25,6 +25,7 @@
                 <label for="choiMois" accesskey="n">Mois : </label>
                 <select id="choiMois" name="choiMois">
                     <?php
+                    //Affiche une liste deroulante avec les mois disponible par visiteur et par default le mois en cour
                     if ($moisASelectionner == NULL) {
                         ?>
                         <option selected value="<?php echo $mois ?>"><?php echo $numMois . "/" . $numAnnee ?> </option>
