@@ -16,7 +16,7 @@
  */
 class PdoGsb {
 
-    private static $serveur = 'mysql:host=localhost:3306/';
+    private static $serveur = 'mysql:host=localhost:3306';
     private static $bdd = 'dbname=gsb';
     private static $user = 'root';
     private static $mdp = '';
@@ -157,7 +157,7 @@ class PdoGsb {
         $lesCles = array_keys($lesFrais);
         foreach ($lesCles as $unIdFrais) {
             $qte = $lesFrais[$unIdFrais];
-            $req = "update lignefraisforfait set lignefraisforfait.quantite = $qte
+            $req = "update lignefraisforfait set lignefraisforfait.quantite = '$qte'
 			where lignefraisforfait.idVisiteur = '$idVisiteur' and lignefraisforfait.mois = '$mois'
 			and lignefraisforfait.idFraisForfait = '$unIdFrais'";
             PdoGsb::$monPdo->exec($req);

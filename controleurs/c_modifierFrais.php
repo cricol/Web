@@ -17,8 +17,9 @@ switch ($action) {
             $moisASelectionner = $leMois;
             include("vues/comptable/v_validerVisiteur.php");
             $nouvelleID = $_POST['lstVehicule'];
+            $qte = $_POST['quantite'];
             $pdo->majVehiculeFicheFrais($VisiteurSelectionner, $leMois, $nouvelleID);
-            $pdo->majFraisForfait($VisiteurSelectionner, $leMois, $_POST['quantite']);
+            $pdo->majFraisForfait($VisiteurSelectionner, $leMois, $qte);
             break;
         }
     case 'supprimerFraisHorsForfais': {

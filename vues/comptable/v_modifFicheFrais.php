@@ -7,68 +7,69 @@
 
     <label>Type de Vehicule :</label>
     <form action="index.php?uc=modifierFrais&action=ActualiserFichierFrais" method="post">
-    <select id="lstVehicule" name="lstVehicule">
-        <?php
-        foreach ($lesVehicules as $unVehicule) {
-            $idVoitureVisiteur = $idVehicule['idVehicule'];
-            if ($unVehicule['id'] == $idVoitureVisiteur) {
-                ?> 
-                <option selected value="<?php echo $unVehicule['id'] ?>"><?php echo $unVehicule['libelle'] ?> </option>
-                <?php
-                $prixKm = $unVehicule['prix'];
-                $idVoitureVisiteur = $unVehicule['id'];
-            } else {
-                ?>                    
-                <option value="<?php echo $unVehicule['id'] ?>"><?php echo $unVehicule['libelle'] ?> </option>
-                <?php
+        <select id="lstVehicule" name="lstVehicule">
+            <?php
+            foreach ($lesVehicules as $unVehicule) {
+                $idVoitureVisiteur = $idVehicule['idVehicule'];
+                if ($unVehicule['id'] == $idVoitureVisiteur) {
+                    ?> 
+                    <option selected value="<?php echo $unVehicule['id'] ?>"><?php echo $unVehicule['libelle'] ?> </option>
+                    <?php
+                    $prixKm = $unVehicule['prix'];
+                    $idVoitureVisiteur = $unVehicule['id'];
+                } else {
+                    ?>                    
+                    <option value="<?php echo $unVehicule['id'] ?>"><?php echo $unVehicule['libelle'] ?> </option>
+                    <?php
+                }
             }
-        }
-        ?>
-    </select>
+            ?>
+        </select>
 
-    <table class="listeLegere">
-        <caption><h3>Eléments forfaitisés</h3></caption>
-        <tr>
-            <th>Frais Forfaitaires</th>
-            <th>Quantité</th>
-            <th>Montant unitaire</th>
-            <th>Total</th>
-        </tr>
-        
+        <table class="listeLegere">
+            <caption><h3>Eléments forfaitisés</h3></caption>
+            <tr>
+                <th>Frais Forfaitaires</th>
+                <th>Quantité</th>
+                <th>Montant unitaire</th>
+                <th>Total</th>
+            </tr>
+
 
             <?php
             foreach ($lesFraisForfait as $unFraisForfait) {
                 $quantite = $unFraisForfait['quantite'];
                 $libelle = $unFraisForfait['libelle'];
                 $prixunitaire = $unFraisForfait['prix'];
+                $idfrais = $unFraisForfait['idfrais'];
                 $total = $quantite * $prixunitaire;
                 $totalKm = $quantite * $prixKm;
                 ?>
                 <tr>
-                    <td><input readonly size="17" autofocus type="text" name="quantite[<?php echo $libelle ?>]" value="<?php echo $libelle ?>"> </td>
-                    <td><input size="7" autofocus type="text" name="quantite[<?php echo $quantite ?>]" value="<?php echo $quantite ?>"> </td>
+                    <td><?php echo $libelle ?> </td>
+                    <td><input size="7" autofocus type="text" name="quantite[<?php echo $idfrais ?>]" value="<?php echo $quantite ?>"> </td>
                     <?php
                     if ($libelle == 'Nombre Kilometre') {
                         ?>
-                        <td><input size="5" autofocus type="text" name="quantite[<?php echo $prixunitaire ?>]" value="<?php echo $prixKm ?>"> </td>
-                        <td><input readonly size="5" autofocus type="text" name="quantite[Total]" value="<?php echo $totalKm ?>"> </td>
+                        <td><?php echo $prixKm ?></td>
+                        <td><?php echo $totalKm ?> </td>
                         <?php
                     } else {
                         ?>
-                        <td><input size="5" autofocus type="text" name="quantite[<?php echo $prixunitaire ?>]" value="<?php echo $prixunitaire ?>"> </td>
-                        <td><input readonly size="5" autofocus type="text" name="quantite[Total]" value="<?php echo $total ?>"> </td>
+                        <td><?php echo $prixunitaire ?> </td>
+                        <td><?php echo $total ?></td>
                         <?php
                     }
                 }
                 ?>
 
             </tr>            
-    </table>
+        </table>
 
-    <input type="hidden" name="choiVisiteur" value="<?php echo $VisiteurSelectionner ?>" />
-    <input type="hidden" name="choiMois" value="<?php echo $leMois ?>" />
-    <input type="submit" name="valider" value="Valider les Nouveaux Frais" onclick="
-            return confirm('Voulez-vous vraiment Valider les Nouveaux Frais ?');">
+        <input type="hidden" name="choiVisiteur" value="<?php echo $VisiteurSelectionner ?>" />
+        <input type="hidden" name="choiMois" value="<?php echo $leMois ?>" />
+        <input type="submit" name="valider" value="Valider les Nouveaux Frais" onclick="
+                return confirm('Voulez-vous vraiment Valider les Nouveaux Frais ?');">
 
     </form>
 
@@ -104,7 +105,7 @@
                             <input type="hidden" name="choiVisiteur" value="<?php echo $VisiteurSelectionner ?>" />
                             <input type="hidden" name="choiMois" value="<?php echo $leMois ?>" />
                             <input type="submit" name="supprimer" value="Supprimer" onclick="
-                                            return confirm('Voulez-vous vraiment Supprimer ?');"> 
+                                    return confirm('Voulez-vous vraiment Supprimer ?');"> 
                         </form> 
 
                         <form action="index.php?uc=modifierFrais&action=reporterunFrais" method="post">
@@ -115,7 +116,7 @@
                             <input type="hidden" name="choiVisiteur" value="<?php echo $VisiteurSelectionner ?>" />
                             <input type="hidden" name="choiMois" value="<?php echo $leMois ?>" />
                             <input type="submit" name="<?php $unFraisHorsForfait['id'] ?>" value="Reporter Le Frais" onclick="
-                                            return confirm('Voulez-vous vraiment Reporter ce Frais ?');"> </td>
+                                    return confirm('Voulez-vous vraiment Reporter ce Frais ?');"> </td>
                         </form>
                 </tr>
 
