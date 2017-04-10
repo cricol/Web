@@ -16,10 +16,10 @@
  */
 class PdoGsb {
 
-    private static $serveur = 'mysql:host=db669148864.db.1and1.com';
-    private static $bdd = 'dbname=db669148864';
-    private static $user = 'dbo669148864';
-    private static $mdp = 'czCQuuir3QiLuVHS';
+    private static $serveur = 'mysql:host=localhost:3307';
+    private static $bdd = 'dbname=gsb';
+    private static $user = 'root';
+    private static $mdp = '';
     private static $monPdo;
     private static $monPdoGsb = null;
 
@@ -270,8 +270,8 @@ class PdoGsb {
      */
     public function creeNouveauFraisHorsForfait($idVisiteur, $mois, $libelle, $date, $montant) {
         $dateFr = dateFrancaisVersAnglais($date);
-        $req = "insert into lignefraishorsforfait 
-		values('','$idVisiteur','$mois','$libelle','$dateFr','$montant')";
+        $req = "insert into lignefraishorsforfait (idVisiteur, mois, libelle, date, montant)
+		values('$idVisiteur','$mois','$libelle','$dateFr','$montant')";
         PdoGsb::$monPdo->exec($req);
     }
 

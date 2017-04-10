@@ -31,13 +31,13 @@ switch ($action) {
     case 'reporterunFrais': {
             $moisASelectionner = $leMois;
             include("vues/comptable/v_validerVisiteur.php");
-            $mois = modifieLaDate(date("d/m/Y"), "+1 month");
+            $mois = modifieLaDate(date('d/m/Y'), '+1 month');
             $lesInfosFicheFraisaTester = $pdo->getLesInfosFicheFrais($VisiteurSelectionner, $mois);
             if (!$lesInfosFicheFraisaTester) {
                 $pdo->creeNouvellesLignesFrais($VisiteurSelectionner, $mois);
                 $pdo->creeNouveauFraisHorsForfait($VisiteurSelectionner, $mois, $_POST['libellefraishorsforfait'], $_POST['date'], $_POST['montant']);
                 $pdo->supprimerFraisHorsForfait($_POST['id']);
-            } elseif ($lesInfosFicheFrais) {
+            } elseif ($lesInfosFicheFraisaTester) {
                 $pdo->creeNouveauFraisHorsForfait($VisiteurSelectionner, $mois, $_POST['libellefraishorsforfait'], $_POST['date'], $_POST['montant']);
                 $pdo->supprimerFraisHorsForfait($_POST['id']);
             }

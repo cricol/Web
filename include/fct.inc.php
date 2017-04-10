@@ -88,8 +88,7 @@ function getMoisComptable($date) {
 }
 
 /**
- * Ajoute ou soustrait une date a la date du jour
- 
+ * Ajoute ou soustrait une date a la date du jour 
    
  * @param $date au format  jj/mm/aaaa
  * @param nbAjouter au format texte avec en debut "+" ou "-" suivie du nombre a ajouter ou soustraire puis de "years", "month" ou "days" selon les besoins *        

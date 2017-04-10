@@ -23,6 +23,10 @@
                     <?php
                 }
             }
+            if ($prixKm == null) {
+                //si il n'y a pas de vehicule selectionner on met le prixkm a 0
+                $prixKm = 0;
+            }
             ?>
         </select>
 
@@ -51,7 +55,19 @@
                     <?php
                     if ($libelle == 'Nombre Kilometre') {
                         ?>
-                        <td><?php echo $prixKm ?></td>
+                        <td>
+                            <?php
+                                if($prixKm == 0){
+                                    echo 'Aucun Type de Vehicule';
+                                }
+                                else{
+                                    echo $prixKm ;
+                                }
+                                
+
+                            ?>
+                        </td>
+
                         <td><?php echo $totalKm ?> </td>
                         <?php
                     } else {
@@ -105,7 +121,7 @@
                             <input type="hidden" name="choiVisiteur" value="<?php echo $VisiteurSelectionner ?>" />
                             <input type="hidden" name="choiMois" value="<?php echo $leMois ?>" />
                             <input type="submit" name="supprimer" value="Supprimer" onclick="
-                                    return confirm('Voulez-vous vraiment Supprimer ?');"> 
+                                            return confirm('Voulez-vous vraiment Supprimer ?');"> 
                         </form> 
 
                         <form action="index.php?uc=modifierFrais&action=reporterunFrais" method="post">
@@ -116,7 +132,7 @@
                             <input type="hidden" name="choiVisiteur" value="<?php echo $VisiteurSelectionner ?>" />
                             <input type="hidden" name="choiMois" value="<?php echo $leMois ?>" />
                             <input type="submit" name="<?php $unFraisHorsForfait['id'] ?>" value="Reporter Le Frais" onclick="
-                                    return confirm('Voulez-vous vraiment Reporter ce Frais ?');"> </td>
+                                            return confirm('Voulez-vous vraiment Reporter ce Frais ?');"> </td>
                         </form>
                 </tr>
 
